@@ -282,11 +282,18 @@ namespace WykopSDK.WWW
                     var divs = doc.QuerySelector(@"div[data-type=""users""]").QuerySelectorAll("div");
                     foreach (var item in divs)
                     {
-                        var ahref = item.Children[0] as IHtmlAnchorElement;
-                        var url = ahref.Href;
+                        try
+                        {
+                            var ahref = item.Children[1] as IHtmlAnchorElement;
+                            var url = ahref.Href;
 
-                        var splitUrl = url.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-                        users.Add(splitUrl.Last());
+                            var splitUrl = url.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                            users.Add(splitUrl.Last());
+                        }
+                        catch
+                        {
+
+                        }
                     }
                 }
             }
